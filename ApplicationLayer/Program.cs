@@ -76,6 +76,8 @@ builder.Services.AddScoped<IDepartment, DepartmentRepository>();
 builder.Services.AddScoped<IUserAccount, AccountRepository>();
 builder.Services.AddScoped<IEmployee, EmployeeRepository>();
 builder.Services.AddScoped<IEmpDept, EmpDeptRepository>();
+builder.Services.AddScoped<ICommissionRepository, CommissionRepository>();
+builder.Services.AddScoped<ICommissionAgentRepository, CommissionAgentRepository>();
 
 
 
