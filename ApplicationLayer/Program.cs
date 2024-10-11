@@ -78,6 +78,15 @@ builder.Services.AddScoped<IEmployee, EmployeeRepository>();
 builder.Services.AddScoped<IEmpDept, EmpDeptRepository>();
 builder.Services.AddScoped<ICommissionRepository, CommissionRepository>();
 builder.Services.AddScoped<ICommissionAgentRepository, CommissionAgentRepository>();
+builder.Services.AddScoped<ICustomerCallRequestRepository, CustomerCallRequestRepository>();
+builder.Services.AddScoped<IFeedbackRepository, FeedbackRepository>();
+builder.Services.AddScoped<IFollowUpRepository, FollowUpRepository>();
+builder.Services.AddScoped<IGuideRepository, GuideRepository>();
+builder.Services.AddScoped<IActivityLogRepository, ActivityLogRepository>();
+builder.Services.AddScoped<IComplainRepository, ComplainRepository>();
+builder.Services.AddScoped<ICostRepository, CostRepository>();
+builder.Services.AddScoped<IHotelRepository, HotelRepository>();
+builder.Services.AddScoped<IInsuranceRepository, InsuranceRepository>();
 
 
 

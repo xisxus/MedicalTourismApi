@@ -9,7 +9,7 @@ namespace DataAccessLayer.Entites.GuideRelated
 {
     public class Guide
     {
-        public int GuidID { get; set; }
+        public int GuideId { get; set; }
         public string GuidName { get; set; }
         public string PhoneNo { get; set; }
         public string GuidePhotoUrl { get; set; }

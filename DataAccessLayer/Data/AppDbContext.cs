@@ -152,7 +152,7 @@ namespace DataAccessLayer.Data
                 .HasForeignKey(a => a.HospitalID);
 
             builder.Entity<Guide>()
-        .HasKey(g => g.GuidID);
+        .HasKey(g => g.GuideId);
 
 
 
