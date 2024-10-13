@@ -77,6 +77,11 @@ builder.Services.AddScoped<IUserAccount, AccountRepository>();
 builder.Services.AddScoped<IEmployee, EmployeeRepository>();
 builder.Services.AddScoped<IEmpDept, EmpDeptRepository>();
 
+builder.Services.AddScoped<IFacilitiesRepository, FacilitiesRepository>();
+builder.Services.AddScoped<IHospitalRepository, HospitalRepository>();
+builder.Services.AddScoped<IHospitalFacilitiesRepository, HospitalFacilitiesRepository>();
+builder.Services.AddScoped<IResidenceHospitalRepository, ResidenceHospitalRepository>();
+
 
 
 builder.Services.AddCors(options =>
