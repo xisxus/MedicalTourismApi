@@ -88,6 +88,11 @@ builder.Services.AddScoped<ICostRepository, CostRepository>();
 builder.Services.AddScoped<IHotelRepository, HotelRepository>();
 builder.Services.AddScoped<IInsuranceRepository, InsuranceRepository>();
 
+builder.Services.AddScoped<IFacilitiesRepository, FacilitiesRepository>();
+builder.Services.AddScoped<IHospitalRepository, HospitalRepository>();
+builder.Services.AddScoped<IHospitalFacilitiesRepository, HospitalFacilitiesRepository>();
+builder.Services.AddScoped<IResidenceHospitalRepository, ResidenceHospitalRepository>();
+
 
 
 builder.Services.AddCors(options =>
