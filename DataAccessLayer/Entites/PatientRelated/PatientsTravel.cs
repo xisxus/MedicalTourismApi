@@ -18,10 +18,12 @@ namespace DataAccessLayer.Entites.PatientRelated
         public int GuidID { get; set; }
         public virtual Guide Guide { get; set; }
         public string PickupLandMark { get; set; }
-        public int TicketID { get; set; }
-        public virtual Ticket Ticket { get; set; }
+        public ICollection<Ticket> Tickets { get; set; }
+        //public int TicketID { get; set; }
+        //public virtual Ticket Ticket { get; set; }
 
-
+        //TODO: Facilities Recheck
+        //TODO: PatientTravel have Icollection of Ticket
         public ICollection<PatientFacilities> PatientFacilities { get; set; }
     }
 }
