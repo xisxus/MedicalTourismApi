@@ -17,8 +17,12 @@ namespace DataAccessLayer.Entites.TicketAndVisa
         public DateTime ArrivelTime { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now; // Timestamp when the entry was created
         public DateTime UpdatedAt { get; set; } = DateTime.Now;  // Timestamp when the entry was last updated
+        //TODO:PatientTravelId should be have 
+       
+        public int PatientsTravelId { get; set; }
 
-        public ICollection<PatientsTravel> PatientsTravels { get; set; }
+        public virtual PatientsTravel PatientsTravel { get; set; }
+
 
     }
 }

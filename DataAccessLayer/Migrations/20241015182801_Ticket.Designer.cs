@@ -4,6 +4,7 @@ using DataAccessLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241015182801_Ticket")]
+    partial class Ticket
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -658,11 +661,11 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("DataAccessLayer.Entites.GuideRelated.Guide", b =>
                 {
-                    b.Property<int>("GuideId")
+                    b.Property<int>("GuidID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GuideId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GuidID"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -682,7 +685,7 @@ namespace DataAccessLayer.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("GuideId");
+                    b.HasKey("GuidID");
 
                     b.ToTable("Guides");
                 });
@@ -1088,7 +1091,7 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("GuidID")
                         .HasColumnType("int");
 
-                    b.Property<int>("GuideId")
+                    b.Property<int>("GuideGuidID")
                         .HasColumnType("int");
 
                     b.Property<int>("PatientID")
@@ -1100,7 +1103,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("PatientsTravelId");
 
-                    b.HasIndex("GuideId");
+                    b.HasIndex("GuideGuidID");
 
                     b.HasIndex("PatientID");
 
@@ -2257,7 +2260,7 @@ namespace DataAccessLayer.Migrations
                 {
                     b.HasOne("DataAccessLayer.Entites.GuideRelated.Guide", "Guide")
                         .WithMany("PatientsTravels")
-                        .HasForeignKey("GuideId")
+                        .HasForeignKey("GuideGuidID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
