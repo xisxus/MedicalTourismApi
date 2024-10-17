@@ -1,4 +1,5 @@
-﻿using DataAccessLayer.Entites.HospitalRelated;
+﻿using DataAccessLayer.Entites.Doctors;
+using DataAccessLayer.Entites.HospitalRelated;
 using DataAccessLayer.Entites.PatientRelated;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,8 @@ namespace DataAccessLayer.Entites.TreatmentAndSurgery
         public int PatientID { get; set; }
         public Patient Patient { get; set; }
 
+        public int DoctorId { get; set; }
+        public Doctor Doctor { get; set; }
         public int HospitalID { get; set; }
         public Hospital Hospital { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now; // Timestamp when the entry was created

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241011201715_guide")]
-    partial class guide
+    [Migration("20241017172741_doctornAppointment")]
+    partial class doctornAppointment
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1101,16 +1101,11 @@ namespace DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TicketID")
-                        .HasColumnType("int");
-
                     b.HasKey("PatientsTravelId");
 
                     b.HasIndex("GuideId");
 
                     b.HasIndex("PatientID");
-
-                    b.HasIndex("TicketID");
 
                     b.ToTable("PatientsTravels");
                 });
@@ -1163,6 +1158,9 @@ namespace DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("PatientsTravelId")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("TicketPrice")
                         .HasColumnType("decimal(18,2)");
 
@@ -1178,6 +1176,8 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("TicketID");
+
+                    b.HasIndex("PatientsTravelId");
 
                     b.ToTable("Tickets");
                 });
@@ -1575,6 +1575,9 @@ namespace DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
                     b.Property<int>("HospitalID")
                         .HasColumnType("int");
 
@@ -1585,6 +1588,8 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("AppointmentID");
+
+                    b.HasIndex("DoctorId");
 
                     b.HasIndex("HospitalID");
 
@@ -2270,17 +2275,20 @@ namespace DataAccessLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DataAccessLayer.Entites.TicketAndVisa.Ticket", "Ticket")
-                        .WithMany("PatientsTravels")
-                        .HasForeignKey("TicketID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Guide");
 
                     b.Navigation("Patient");
+                });
 
-                    b.Navigation("Ticket");
+            modelBuilder.Entity("DataAccessLayer.Entites.TicketAndVisa.Ticket", b =>
+                {
+                    b.HasOne("DataAccessLayer.Entites.PatientRelated.PatientsTravel", "PatientsTravel")
+                        .WithMany("Tickets")
+                        .HasForeignKey("PatientsTravelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PatientsTravel");
                 });
 
             modelBuilder.Entity("DataAccessLayer.Entites.TicketAndVisa.VisaApplicationForm", b =>
@@ -2315,6 +2323,12 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("DataAccessLayer.Entites.TreatmentAndSurgery.Appointment", b =>
                 {
+                    b.HasOne("DataAccessLayer.Entites.Doctors.Doctor", "Doctor")
+                        .WithMany("Appointments")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("DataAccessLayer.Entites.HospitalRelated.Hospital", "Hospital")
                         .WithMany("Appointments")
                         .HasForeignKey("HospitalID")
@@ -2326,6 +2340,8 @@ namespace DataAccessLayer.Migrations
                         .HasForeignKey("PatientID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Doctor");
 
                     b.Navigation("Hospital");
 
@@ -2463,6 +2479,8 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("DataAccessLayer.Entites.Doctors.Doctor", b =>
                 {
+                    b.Navigation("Appointments");
+
                     b.Navigation("DoctorExperiences");
 
                     b.Navigation("DoctorQualifications");
@@ -2545,11 +2563,8 @@ namespace DataAccessLayer.Migrations
             modelBuilder.Entity("DataAccessLayer.Entites.PatientRelated.PatientsTravel", b =>
                 {
                     b.Navigation("PatientFacilities");
-                });
 
-            modelBuilder.Entity("DataAccessLayer.Entites.TicketAndVisa.Ticket", b =>
-                {
-                    b.Navigation("PatientsTravels");
+                    b.Navigation("Tickets");
                 });
 
             modelBuilder.Entity("DataAccessLayer.Entites.TicketAndVisa.VisaApplicationForm", b =>

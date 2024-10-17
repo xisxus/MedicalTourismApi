@@ -5,7 +5,7 @@
 namespace DataAccessLayer.Migrations
 {
     /// <inheritdoc />
-    public partial class guide : Migration
+    public partial class doctornAppointment : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -29,6 +29,26 @@ namespace DataAccessLayer.Migrations
                 table: "Guides",
                 newName: "GuideId");
 
+            migrationBuilder.AddColumn<int>(
+                name: "DoctorId",
+                table: "Appointments",
+                type: "int",
+                nullable: false,
+                defaultValue: 0);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Appointments_DoctorId",
+                table: "Appointments",
+                column: "DoctorId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Appointments_Doctors_DoctorId",
+                table: "Appointments",
+                column: "DoctorId",
+                principalTable: "Doctors",
+                principalColumn: "DoctorId",
+                onDelete: ReferentialAction.Restrict);
+
             migrationBuilder.AddForeignKey(
                 name: "FK_PatientsTravels_Guides_GuideId",
                 table: "PatientsTravels",
@@ -42,8 +62,20 @@ namespace DataAccessLayer.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
+                name: "FK_Appointments_Doctors_DoctorId",
+                table: "Appointments");
+
+            migrationBuilder.DropForeignKey(
                 name: "FK_PatientsTravels_Guides_GuideId",
                 table: "PatientsTravels");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Appointments_DoctorId",
+                table: "Appointments");
+
+            migrationBuilder.DropColumn(
+                name: "DoctorId",
+                table: "Appointments");
 
             migrationBuilder.RenameColumn(
                 name: "GuideId",

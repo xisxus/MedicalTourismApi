@@ -18,6 +18,7 @@ namespace DataAccessLayer.Entites.Doctors
         public ICollection<DoctorQualification> DoctorQualifications { get; set; }
         public ICollection<DoctorExperience> DoctorExperiences { get; set; }
         public ICollection<TreatmentPlan> TreatmentPlans { get; set; }
+        public ICollection<Appointment> Appointments { get; set; }
 
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;

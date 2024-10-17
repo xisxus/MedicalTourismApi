@@ -155,7 +155,11 @@ namespace DataAccessLayer.Data
         .HasKey(g => g.GuideId);
 
 
-
+            builder.Entity<Appointment>()
+           .HasOne(a => a.Doctor)
+           .WithMany(d => d.Appointments)
+           .HasForeignKey(a => a.DoctorId)
+           .OnDelete(DeleteBehavior.Restrict);
 
 
             builder.Entity<TreatmentPlan>(entity =>

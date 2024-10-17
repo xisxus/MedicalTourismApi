@@ -15,7 +15,7 @@ namespace DataAccessLayer.Entites.PatientRelated
         public int PatientID { get; set; }
         public virtual Patient Patient { get; set; }
 
-        public int GuidID { get; set; }
+        public int GuideId { get; set; }
         public virtual Guide Guide { get; set; }
         public string PickupLandMark { get; set; }
         public ICollection<Ticket> Tickets { get; set; }
